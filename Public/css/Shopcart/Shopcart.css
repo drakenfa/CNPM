@@ -1,0 +1,739 @@
+.no-item-icon {
+    text-align: center; /* căn giữa nội dung */
+    margin-top: 50px; /* điều chỉnh khoảng cách từ phía trên */
+    transform: scale(1); /* phóng to kích thước */
+    margin-left: auto; /* căn giữa theo chiều ngang */
+    margin-right: auto; /* căn giữa theo chiều ngang */
+    min-height:74vh;
+}
+.name-small{
+    width: 131.31px;
+}
+.container {
+    display: flex;
+   /* justify-content: center; */
+}
+.total-small{
+    margin-left: 85px; 
+}
+.numberDiv{
+     margin-left: 150px;
+    /* margin-right:200px;  */
+}
+.money-small{
+    margin-left: 210px;
+}
+.reset{
+    font-size: 20px;
+    color: red;
+    margin-left: 700px;
+    margin-top:30px;
+    margin-bottom:20px;
+}
+.reset button{
+    color: aqua;
+}
+.reset button:hover{
+    color: red;
+}
+.reset-small {
+    margin-left: 20px;
+    color: aqua;
+}
+.reset-small:hover{
+    color: red;
+}
+.gio-1 {
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 120px;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.inline {
+    display: inline-block;
+}
+.backhome-2 {
+    margin-left: 120px;
+    color: black; /* Set text color to black */
+    text-decoration: none; /* Remove underline */
+}
+
+.backhome-2:hover {
+    font-weight: bold; /* Bold font on hover */
+}
+.no-item-icon a {
+    display: block; /* biến các thẻ a thành block elements để có thể sử dụng margin */
+    margin-top: 20px; /* tạo khoảng cách 50px dưới mỗi thẻ a */
+}
+.backhome {
+    color:blue; /* chuyển màu chữ thành đỏ */
+    text-decoration: none; /* loại bỏ dòng gạch dưới */
+    border: 0.5px solid blue; /* tạo border màu xanh, độ rộng 2px */
+    border-radius: 10px; /* tạo border vo tròn */
+    padding: 20px 200px; /* thêm padding để tạo khoảng cách giữa border và nội dung */
+    width: fit-content;
+    font-weight: bold;
+    margin-left: auto; /* căn giữa theo chiều ngang */
+    margin-right: auto; /* căn giữa theo chiều ngang */
+}
+.shop-cart {
+    margin-left: 100px;
+    margin-right: 100px;
+    display: flex; /* Sử dụng Flexbox để xếp hai phần tử cart và Total cùng một hàng */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    padding-bottom:80px;
+    min-height:80vh;
+}
+
+.cart, .Total {
+    /* flex: 1; Phần tử cart và Total chiếm bằng nhau trên mỗi bên của container */
+    margin: 0 15px;
+}
+.Total{
+    max-height: 180px;
+}
+.cart {
+    flex: 0.7;
+    /* background-color: red; */
+    border: 1px solid #000; /* Thiết lập border có độ dày 2px và màu đen */
+    padding: 10px; /* Thêm padding để tạo khoảng trắng xung quanh nội dung */
+    /* border-radius: 5%; */
+}
+
+.cart-header {
+    display: flex;
+}
+
+.header1 {
+    width: 60%;
+    margin-left:15px;
+}
+
+.header2 {
+    width: 15%;
+}
+/* Định dạng cho các phần tử tạo ra trong hàm addProducttocart */
+.product-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.product-item > div {
+    margin-right: 10px;
+}
+
+/* Định dạng cho các phần tử giá trị */
+.product-price,
+.quantity,
+.total-price-product {
+    width: 25%;
+    /* font-weight: bold; */
+}
+.product-price,
+.total-price-product {
+       font-weight: bold;
+
+}
+.quantity{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+.quantity .remove-btn {
+    color: blue;
+    margin-top: 10px;
+}
+.quantity .remove-btn:hover{
+    color: red;
+}
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity input {
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 30px; /* Thiết lập kích thước của input */
+    /* Hoặc có thể sử dụng max-width nếu bạn muốn input co giãn tối đa */
+    /* max-width: 50px; */
+}
+.total-price-product{
+    margin-left: 20px;
+}
+/* Định dạng cho các div nằm dưới "Đơn giá", "Số lượng" và "Thành tiền" */
+.product-name {
+    width: 60%; /* Sử dụng lại chiều rộng của header1 */
+    order: 1; /* Xác định thứ tự xuất hiện trong flex container */
+    margin-left:30px;
+}
+.product-name:hover {
+    color: blue;
+}
+
+.product-price {
+    order: 2; /* Xác định thứ tự xuất hiện trong flex container */
+}
+
+.quantity {
+    order: 3; /* Xác định thứ tự xuất hiện trong flex container */
+}
+
+.total-price-product {
+    order: 4; /* Xác định thứ tự xuất hiện trong flex container */
+}
+
+
+.Total{
+    flex:0.3;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    /* background-color: blue; */
+    border: 0.5px solid #000; /* Thiết lập border có độ dày 2px và màu đen */
+    padding: 10px; /* Thêm padding để tạo khoảng trắng xung quanh nội dung */
+ 
+}
+.Total-header{
+    font-weight: bold;
+}
+.Total-content {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép các phần tử con xuống dòng khi không đủ không gian */
+    justify-content: space-between; /* Căn các phần tử con sang hai bên */
+    align-items: center; /* Căn các phần tử con theo chiều dọc */
+}
+
+.Total-footer{
+    background-color: blue;
+    color:white; /* chuyển màu chữ thành đỏ */
+    text-decoration: none; /* loại bỏ dòng gạch dưới */
+    border: 0.5px solid ; /* tạo border màu xanh, độ rộng 2px */
+    border-radius: 10px; /* tạo border vo tròn */
+    padding: 20px 50px; /* thêm padding để tạo khoảng cách giữa border và nội dung */
+    width: fit-content;
+    text-align: center;
+    font-weight: bold;
+    margin-left: auto; /* căn giữa theo chiều ngang */
+    margin-right: auto; /* căn giữa theo chiều ngang */
+    margin-top: 25px;
+}
+.temp-money{
+    width: 50%;
+}
+.value-temp-money{
+    width: 50%;
+    text-align: right;
+}
+.value-total-money{
+    color: blue;
+}
+.product-in-cart {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+.product-in-cart img.product-image {
+    width: 50px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Adjust margin as needed */
+}
+.money-span {
+    flex-grow: 1; /* Chia đều không gian còn lại */
+    text-align: right; /* Căn nội dung của span về bên phải */
+    margin-right: 20px; /* Khoảng cách giữa money và numberdiv */
+}
+.product-in-cart input[type="text"] {
+    flex-grow: 1; /* Chia đều không gian còn lại */
+    flex-shrink: 0; /* Không co lại khi không đủ không gian */
+    width: 30px; /* Độ rộng của input */
+    text-align: center; /* Căn giữa nội dung */
+    margin-right: 5px; /* Khoảng cách giữa input và button */
+}
+.help{
+    color: white;
+}
+.product-in-cart button {
+    flex-shrink: 0; /* Không co lại khi không đủ không gian */
+    margin-right: 5px; /* Khoảng cách giữa các button */
+}
+.product-in-cart input[type="checkbox"] {
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+.product-in-cart div#number-PRODUCT_ID {
+    display: flex;
+    align-items: center; /* Align items horizontally */
+    margin-right: 20px; /* Khoảng cách giữa numberdiv và total */
+}
+
+.product-in-cart span#total-PRODUCT_ID {
+    flex-grow: 1; /* Chia đều không gian còn lại */
+    text-align: right; /* Căn nội dung của span về bên phải */
+}
+
+.product-in-cart button {
+    margin-right: 5px; /* Adjust margin as needed */
+}
+.numberDiv {
+    display: flex;
+    align-items: center; /* Căn các thành phần vào giữa theo chiều dọc */
+}
+
+.numberDiv input[type="text"] {
+    flex-grow: 1; /* Input chiếm hết không gian còn lại */
+    margin-right: 5px; /* Khoảng cách giữa input và button */
+}
+
+.numberDiv button {
+    margin-right: 5px; /* Khoảng cách giữa các button */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* css của thằng ngu Home
+@import url('../globals/globals.css');
+
+/* globals */
+.style-panel-title .set-title-name{
+    text-indent: 15px;
+    font-size: 14pt;
+    font-weight: 650;
+}
+
+/* elements */
+.home-page{
+    width:100%;
+    height:100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-page .content-wrapper{
+    width:85%;
+    
+}
+
+/* widget */
+@keyframes ad-widget-slide-left {
+    0%{
+        translate: 0 0;
+    }
+    100%{
+        translate: 60vw 0;
+    }
+}
+@keyframes ad-widget-slide-right {
+    0%{
+        translate: 0 0;
+    }
+    100%{
+        translate: -60vw 0;
+    }
+}
+@keyframes ad-widget-slide-to-start {
+    0%{
+        translate: 0% 0;
+    }
+    100%{
+        translate: calc(100% - 60vw) 0;
+    }
+}
+@keyframes ad-widget-slide-to-end {
+    0%{
+        translate: 0% 0;
+    }
+    100%{
+        translate: calc(0px - (100% - 60vw)) 0;
+    }
+}
+
+.widget-panel{
+    width:100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.widget-panel .widget-container{
+    width:60vw;
+}
+
+.widget-panel .widget-container .widget-list-wrapper{
+    width:60vw;
+}
+
+.widget-panel .widget-container .widget-list{
+    display:inline-flex;
+}
+
+.widget-panel .widget-container .widget-item{
+    width:60vw;
+
+    cursor: pointer;
+}
+
+.widget-panel .widget-container .widget-item img{
+    width:60vw;
+}
+
+.widget-panel .widget-container .widget-button{
+    background: rgba(227, 235, 238, 0.7);
+
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.widget-panel .widget-container .widget-button:hover{
+    background: rgba(255,255,255,1);
+}
+
+
+.categories-panel{
+    margin-top: 20px;
+
+    width:100%;
+
+    display:flex;
+    flex-direction: column;
+
+    background-color: var(--main-light-color);
+}
+
+.categories-panel .category-wrapper{
+    align-self: center;
+    width:100%;
+
+
+    overflow-x:hidden;
+    justify-content: center;
+}
+
+.categories-panel .category-list{
+    display: inline-flex;
+    
+    gap: 10px;
+}
+
+.categories-panel .category-wrapper .category-item{
+    width:20vw;
+    min-width: 200px;
+    max-width: 300px;
+
+    aspect-ratio: 2/0.85;
+
+    background-color: var(--secondary-light-color);   
+
+    border-radius: 10px;
+
+    padding: 0px 10px;
+
+    display:flex;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.categories-panel .category-wrapper .category-item > *{
+    height: calc(100% - 20px);
+}
+
+.categories-panel .category-item .item-image-wrapper{
+    aspect-ratio: 1/1;
+}
+
+.categories-panel .category-item .item-image-wrapper img{
+    width:100%;
+    height:100%;
+}
+
+.categories-panel .category-item .item-info-wrapper{
+    display:flex;
+    flex-direction: column;
+    padding-left:10px;
+    padding-top:8px;
+}
+
+.categories-panel .category-item .item-info-wrapper .large-text-info{
+    font-size:calc(12px + 0.6vw);
+    font-weight: 650;
+}
+
+.categories-panel .category-item .item-info-wrapper .small-text-info{
+    margin-top:8px;
+    
+    font-size:calc(9px + 0.4vw);
+}
+
+
+.categories-panel .category-wrapper .category-item:hover{
+    background-color: var(--light-contrast-color2);
+    animation-name: on_hover_item;
+    animation-duration: 0.3s;
+}
+
+.featured-products-panel{
+    width:100%;
+
+    background-color: var(--main-light-color);
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.featured-products-panel .product-set{
+    width:100%;
+    margin:30px;
+    background-color: var(--secondary-light-color);
+}
+
+.featured-products-panel .set-title{
+    margin:10px 0;
+    width:100%;
+
+    height:1.3em;
+    position: relative;
+    overflow: hidden;;
+}
+.featured-products-panel .set-title >*{
+    top:4px;
+}
+.featured-products-panel .set-title .set-title-name{
+    position: absolute;
+    left:0px;
+}
+
+.featured-products-panel .set-title .show-product-button-wrapper{
+    position:absolute;
+    right:20px;
+
+    display:flex;
+    justify-content: center;
+    width:8em;
+    height:100%;
+}
+
+.featured-products-panel .set-title .show-product-button-wrapper.button-effect:hover{
+    font-weight: 650;
+}
+
+.featured-products-panel .set-title .show-product-button-wrapper > *{
+    width:100%;
+    height:100%;    
+    text-align: center;
+}
+
+.featured-products-panel .set-title .show-product-button-wrapper .show-more-button{
+    
+}
+
+.featured-products-panel .set-title .show-product-button-wrapper .hide-button{
+    display:none;
+}
+
+.featured-products-panel .product-list-wrapper{
+    width:100%;
+    overflow:hidden;
+}
+
+.featured-products-panel .product-list{
+    width:calc(100% - 30px);
+    margin: 15px 15px;
+    align-self: center;
+    
+    display:grid;
+    justify-content: center;
+    align-items: center;
+
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+@media screen and ((max-width: 600px)){
+    .featured-products-panel .product-list{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media screen and ((min-width: 600px) and (max-width: 900px)){
+    .featured-products-panel .product-list{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media screen and ((min-width: 900px) and (max-width: 1200px)){
+    .featured-products-panel .product-list{
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+@media screen and ((min-width: 1200px)){
+    .featured-products-panel .product-list{
+        grid-template-columns: repeat(6,1fr);
+    }
+}
+ 
+.featured-products-panel .product-list.hide{
+    grid-auto-rows:0;
+    grid-template-rows: 1fr;
+}
+
+.featured-products-panel .product-list.show{
+    grid-auto-rows:auto;
+}
+
+.featured-products-panel .product-set .product-item{
+    /* max-width: 250px;
+    min-width: 200px;
+    width:20vw; */
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction: column;
+
+    border-radius: 10px;
+
+    background-color: var(--primary-light-color);   
+
+    cursor:pointer;
+}
+
+@keyframes on_hover_item {
+    0%{
+        background-color: var(--primary-light-color);   
+    }
+    100%{
+        background-color: var(--light-contrast-color2);
+    }
+}
+
+.featured-products-panel .product-set .product-item:hover{
+    background-color: var(--light-contrast-color2);
+    animation-name: on_hover_item;
+    animation-duration: 0.3s;
+}
+
+.featured-products-panel .product-item .product-image-wrapper{
+    border-radius: 10px;
+    margin: 15px 15px;
+
+    overflow: hidden;
+    
+    width: auto;
+    aspect-ratio: 1/1;
+
+    align-self: center;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--primary-light-color);
+}
+
+.featured-products-panel .product-item .product-image-wrapper img{
+    width: 100%;
+    padding:5px 5px;
+}
+
+
+.featured-products-panel .product-item .product-display-name{
+    margin: 0 15px;
+    margin-top: 10px;
+
+    font-size: 12pt;
+    font-weight: 550;
+    
+    height: 3em;
+    
+    overflow-y:hidden;
+}
+
+.featured-products-panel .product-item .producer-display-name{
+    margin-left:15px;
+    margin-top: 15px;
+
+    font-size:11pt;
+    font-weight: 400;
+    color:rgb(0, 0, 0)
+}
+
+.featured-products-panel .product-item .product-info-display{
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+
+    margin-left:15px;
+    margin-right:15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    font-size: 12pt;
+    font-weight: 550;
+}
+
+
+.featured-products-panel .product-item .price{
+    width:100%;
+    color: black;
+}
+
+.featured-products-panel .product-item .rating-display{
+    width:100%;
+
+    display: flex;
+    flex-direction:row-reverse;
+    gap:5px;
+
+    justify-self: left;
+}
+
+.featured-products-panel .product-item .rating-value{
+    vertical-align: middle;
+    line-height: normal;
+    
+}
+
+.featured-products-panel .product-item .rating-icon-wrapper{
+    width:18px;
+    height:18px
+}
+
+
+.featured-products-panel .product-item .rating-icon-wrapper img{
+    width:100%;
+    height:100%;
+}
+img.product_image_display {
+    width: 15%;
+}

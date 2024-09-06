@@ -1,0 +1,75 @@
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    width: 100%;
+
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info {
+    text-align: right;
+}
+
+.info p {
+    margin: 5px 5px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: auto;
+    width: 50px; /* Điều chỉnh kích thước của logo */
+    margin-right: 10px; /* Tạo khoảng cách giữa logo và tên logo */
+}
+
+.logo .brand-name {
+    font-weight: bold;
+    font-size: 22px;
+    color: #fff; /* Màu chữ cho tên logo */
+    margin-right: 20px; /* Tạo khoảng cách giữa tên logo và các thông tin khác */
+}
+/* CSS cho màn hình lớn hơn hoặc bằng 768px */
+@media screen and (min-width: 801px) {
+    .container {
+        flex-wrap: nowrap; /* Ngăn chặn các phần tử chồng lên nhau */
+    }
+    .info {
+        margin-left: auto; /* Đẩy các thông tin lên bên phải */
+        text-align: center; 
+    }
+    .logo img {
+        width: 60px;
+    }
+    
+}
+
+/* CSS cho màn hình nhỏ hơn 768px */
+@media screen and (max-width: 800px) {
+    .container {
+        flex-direction: column; /* Chuyển sang bố cục dọc */
+        align-items: flex-start; /* Căn lề trái cho tất cả các phần tử */
+    }
+    .logo img {
+        width: 60px; /* Điều chỉnh kích thước của logo */
+    }
+    .info {
+        margin-top: 20px; /* Tạo khoảng cách giữa logo và thông tin */
+        text-align: center; 
+    }
+    .logo .brand-name {
+        font-size: 20px;
+    }
+}

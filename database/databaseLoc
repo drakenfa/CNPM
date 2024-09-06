@@ -1,0 +1,1082 @@
+
+DELIMITER $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `reduce_shipment_remain` (IN `shipment_id_param` INT, IN `quantity_of_export_param` INT)   BEGIN
+    UPDATE shipments
+    SET remain = remain - quantity_of_export_param
+    WHERE shipment_id = shipment_id_param;
+END$$
+
+DELIMITER ;
+
+CREATE TABLE `accounts` (
+  `account_id` int(11) NOT NULL,
+  `phone_number` varchar(20) NOT NULL,
+  `email` varchar(200) DEFAULT '',
+  `password` varchar(300) NOT NULL,
+  `avatar` varchar(300) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  `is_active` tinyint(1) DEFAULT 1
+);
+
+
+
+CREATE TABLE `attendance` (
+  `attendance_id` int(11) NOT NULL,
+  `timesheet_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `status` enum('Present','Absent','Leave','Late') NOT NULL,
+  `leave_application_id` int(11) NOT NULL
+) ;
+
+--
+
+CREATE TABLE `brands` (
+  `brand_id` int(11) NOT NULL,
+  `brand_name` varchar(100) DEFAULT '' COMMENT 'Ex: SANYO, TOSHIBA,...',
+  `brand_logo` varchar(300) DEFAULT '',
+  `supplier_id` int(11) NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+--
+
+CREATE TABLE `categories` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(100) DEFAULT '' COMMENT 'Ex: Tủ lạnh, máy giặt,...',
+  `category_logo` varchar(300) DEFAULT '',
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+--
+
+CREATE TABLE `contracts` (
+  `contract_id` int(11) NOT NULL,
+  `staff_id` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `salary` decimal(20,2) NOT NULL
+) ;
+
+
+
+CREATE TABLE `customers` (
+  `customer_id` int(11) NOT NULL,
+  `customer_fullname` varchar(100) NOT NULL DEFAULT '',
+  `role_id` int(11) NOT NULL DEFAULT 5,
+  `account_id` int(11) NOT NULL,
+  `gender` tinyint(1) DEFAULT 0 COMMENT 'Male: 0, Female: 1',
+  `address` varchar(200) DEFAULT '' COMMENT 'Địa chỉ của khách hàng',
+  `date_of_birth` date DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `decentralizations` (
+  `decentralization_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `exports` (
+  `export_id` int(11) NOT NULL,
+  `staff_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `export_date` datetime DEFAULT current_timestamp(),
+  `total_price` decimal(20,2) DEFAULT 0.00 COMMENT 'Không tự sinh đc như mysql',
+  `is_active` tinyint(1) DEFAULT 1
+);
+
+
+--
+DELIMITER $$
+CREATE TRIGGER `create_export_details_trigger` AFTER INSERT ON `exports` FOR EACH ROW BEGIN
+    DECLARE export_id INT;
+    SET export_id = NEW.export_id;
+
+    INSERT INTO export_details (export_id, shipment_id, unit_price_export, quantity_export)
+    SELECT export_id, shipment_id, price, number
+    FROM Removes
+    JOIN order_details ON Removes.order_detail_id = order_details.order_detail_id
+    WHERE order_details.order_id = NEW.order_id;
+END
+$$
+DELIMITER ;
+
+
+
+CREATE TABLE `export_details` (
+  `export_detail_id` int(11) NOT NULL,
+  `export_id` int(11) NOT NULL,
+  `shipment_id` int(11) NOT NULL,
+  `unit_price_export` decimal(20,2) DEFAULT 0.00,
+  `quantity_export` int(50) DEFAULT 0
+);
+
+
+
+
+DELIMITER $$
+CREATE TRIGGER `before_export_detail_insert1` BEFORE INSERT ON `export_details` FOR EACH ROW BEGIN
+    -- Get the unit price import of the corresponding shipment
+    DECLARE shipment_unit_price_import DECIMAL(20, 2);
+    SELECT unit_price_import INTO shipment_unit_price_import
+    FROM shipments
+    WHERE shipment_id = NEW.shipment_id;
+    
+    -- Calculate the unit price export (50% higher than unit price import)
+    SET NEW.unit_price_export = shipment_unit_price_import * 1.5;
+END
+$$
+DELIMITER ;
+
+
+CREATE TABLE `guarantees` (
+  `guarantee_id` int(11) NOT NULL,
+  `serial_number` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `start_date` date DEFAULT current_timestamp(),
+  `end_date` date DEFAULT NULL
+) ;
+
+
+
+CREATE TABLE `imports` (
+  `import_id` int(11) NOT NULL,
+  `staff_id` int(11) NOT NULL,
+  `import_date` datetime DEFAULT current_timestamp(),
+  `is_active` tinyint(1) DEFAULT 1
+);
+
+
+
+
+
+CREATE TABLE `leave_application` (
+  `leave_application_id` int(11) NOT NULL,
+  `staff_id` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `reason` varchar(100) NOT NULL,
+  `status` tinyint(1) DEFAULT 0
+) ;
+
+
+CREATE TABLE `likes` (
+  `like_id` int(11) NOT NULL,
+  `number` int(11) DEFAULT NULL,
+  `product_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL
+) ;
+
+
+
+--
+
+CREATE TABLE `modules` (
+  `module_id` int(11) NOT NULL,
+  `module_name` varchar(200) DEFAULT '',
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+
+
+CREATE TABLE `noti` (
+  `noti_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `text` varchar(500) DEFAULT NULL,
+  `date_noti` datetime DEFAULT current_timestamp()
+) ;
+
+
+--
+
+CREATE TABLE `options` (
+  `option_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `option_name` varchar(128) NOT NULL,
+  `option_value` longtext NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL,
+  `staff_id` int(11) DEFAULT NULL,
+  `account_id` int(11) NOT NULL,
+  `receiver_name` varchar(100) DEFAULT '' COMMENT 'Có thể giấu tên',
+  `email_of_receiver` varchar(100) NOT NULL,
+  `phone_number_of_receiver` varchar(20) NOT NULL,
+  `note` varchar(100) DEFAULT '',
+  `order_date` datetime DEFAULT current_timestamp(),
+  `status_of_order` enum('Pending','Processing','Shipped','Delivered','Cancelled') DEFAULT 'Pending',
+  `total_money` decimal(20,2) DEFAULT 0.00,
+  `shipping_method` varchar(100) DEFAULT '',
+  `shipping_address` varchar(200) NOT NULL,
+  `shipping_date` datetime DEFAULT NULL,
+  `tracking_number` varchar(100) DEFAULT '',
+  `payment_method` varchar(100) DEFAULT '',
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+DELIMITER $$
+CREATE TRIGGER `create_export_trigger` AFTER UPDATE ON `orders` FOR EACH ROW BEGIN
+    -- Check if the status_of_order has been changed to 'Shipped'
+    IF OLD.status_of_order <> NEW.status_of_order AND NEW.status_of_order = 'Shipped' THEN
+        -- Insert a new row into exports table
+        INSERT INTO exports (staff_id, order_id, export_date, total_price)
+        SELECT NEW.staff_id, NEW.order_id, NOW(), NEW.total_money;
+
+        -- Update the orders table to set the shipping_date to current date
+        -- Insert into export_details table
+        INSERT INTO export_details (export_id, shipment_id, unit_price_export, quantity_export)
+        SELECT (SELECT MAX(export_id) FROM exports), shipment_id, unit_price_import, quantity
+        FROM shipments
+        WHERE import_id = NEW.order_id;
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `orders_status_change_trigger` AFTER UPDATE ON `orders` FOR EACH ROW BEGIN
+    DECLARE notification_text VARCHAR(500);
+    
+    -- Construct notification text based on the new status_of_order
+    CASE NEW.status_of_order
+        WHEN 'Processing' THEN SET notification_text = CONCAT('Hóa đơn ', NEW.tracking_number, ' của bạn đã thay đổi trạng thái sang: Đang xử lý');
+        WHEN 'Shipped' THEN SET notification_text = CONCAT('Hóa đơn ', NEW.tracking_number, ' của bạn đã thay đổi trạng thái sang: Đã giao');
+        WHEN 'Delivered' THEN SET notification_text = CONCAT('Hóa đơn ', NEW.tracking_number, ' của bạn đã thay đổi trạng thái sang: Đã nhận');
+        WHEN 'Cancelled' THEN SET notification_text = CONCAT('Hóa đơn ', NEW.tracking_number, ' của bạn đã thay đổi trạng thái sang: Đã hủy');
+    END CASE;
+    
+    -- Insert the new notification into the noti table
+    INSERT INTO noti (account_id, text, date_noti) VALUES (NEW.account_id, notification_text, NOW());
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `return_remaining_products_trigger` AFTER UPDATE ON `orders` FOR EACH ROW BEGIN
+    IF OLD.status_of_order <> NEW.status_of_order AND NEW.status_of_order = 'Cancelled' THEN
+        -- Add the returned quantity to the shipment's remain
+        UPDATE shipments s
+        JOIN Removes r ON s.shipment_id = r.shipment_id
+        JOIN order_details od ON od.order_detail_id = r.order_detail_id
+        SET s.remain = s.remain + r.number
+        WHERE od.order_id = NEW.order_id;
+        
+        -- Delete the processed order details from Removes
+        DELETE FROM Removes WHERE order_detail_id IN (
+            SELECT order_detail_id
+            FROM order_details
+            WHERE order_id = NEW.order_id
+        );
+    END IF;
+END
+$$
+DELIMITER ;
+
+
+CREATE TABLE `order_details` (
+  `order_detail_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `sku_id` int(11) NOT NULL,
+  `price` decimal(20,2) DEFAULT 0.00,
+  `number_of_products` int(11) DEFAULT 1 COMMENT 'Phải > 0',
+  `color_of_product` varchar(20) DEFAULT ''
+) ;
+
+
+
+DELIMITER $$
+CREATE TRIGGER `create_removes_trigger` AFTER INSERT ON `order_details` FOR EACH ROW BEGIN
+    DECLARE productsRemaining INT;
+    DECLARE shipmentID INT;
+    DECLARE shipmentRemain INT;
+    DECLARE productsToAdd INT;
+
+    -- Get the total number of products to add and initialize remaining products
+    SET productsRemaining = NEW.number_of_products;
+
+    -- Iterate over shipments with remaining products
+    shipment_loop: WHILE productsRemaining > 0 DO
+        -- Find the next shipment with remaining products
+        SELECT shipment_id, remain INTO shipmentID, shipmentRemain
+        FROM shipments
+        WHERE sku_id = NEW.sku_id AND remain > 0
+        ORDER BY shipment_id
+        LIMIT 1;
+
+        -- If no shipment is found, exit the loop
+        IF shipmentID IS NULL THEN
+            LEAVE shipment_loop;
+        END IF;
+
+        -- Calculate the number of products to assign from this shipment
+        SET productsToAdd = LEAST(productsRemaining, shipmentRemain);
+
+        -- Insert into Removes with the calculated number
+        INSERT INTO Removes (orderID, order_detail_id, shipment_id, number)
+        VALUES (NEW.order_id, NEW.order_detail_id, shipmentID, productsToAdd);
+
+        -- Update remaining products
+        SET productsRemaining = productsRemaining - productsToAdd;
+
+        -- Update remaining quantity in the shipment
+        UPDATE shipments
+        SET remain = remain - productsToAdd
+        WHERE shipment_id = shipmentID;
+    END WHILE;
+END
+$$
+DELIMITER ;
+
+
+
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(350) NOT NULL,
+  `brand_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `price` decimal(20,2) DEFAULT 0.00 COMMENT 'Phải >= 0',
+  `guarantee` int(11) DEFAULT 0,
+  `thumbnail` varchar(300) DEFAULT '' COMMENT 'Phải có ảnh mặc định',
+  `description` longtext DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  `average_rating` float DEFAULT 0,
+  `total_reviews` float DEFAULT 0,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `product_details` (
+  `serial_number` int(11) NOT NULL,
+  `shipment_id` int(11) NOT NULL,
+  `sku_id` int(11) NOT NULL,
+  `sold` tinyint(1) DEFAULT 0
+) ;
+
+
+CREATE TABLE `product_images` (
+  `product_image_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `image_url` varchar(300) DEFAULT '' COMMENT 'Phải có ít nhất 1 ảnh mặc định'
+) ;
+
+
+
+CREATE TABLE `removes` (
+  `orderID` int(11) DEFAULT NULL,
+  `order_detail_id` int(11) DEFAULT NULL,
+  `shipment_id` int(11) DEFAULT NULL,
+  `number` int(50) DEFAULT NULL
+) ;
+
+
+
+
+
+CREATE TABLE `reviews` (
+  `review_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `rating` float DEFAULT NULL,
+  `comment` longtext DEFAULT NULL,
+  `review_date` datetime DEFAULT current_timestamp(),
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `roles` (
+  `role_id` int(11) NOT NULL,
+  `role_name` varchar(20) NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `shipments` (
+  `shipment_id` int(11) NOT NULL,
+  `import_id` int(11) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `unit_price_import` decimal(20,2) DEFAULT 0.00 COMMENT 'Phải > 0',
+  `quantity` int(50) DEFAULT 0 COMMENT 'Phải > giá trị tối thiểu của 1 lô hàng',
+  `remain` int(50) DEFAULT 0 COMMENT 'Phải bé 1 số lượng cụ thể thì mới nhập thêm lô',
+  `sku_id` int(11) NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `skus` (
+  `sku_id` int(11) NOT NULL,
+  `sku_name` varchar(100) DEFAULT NULL,
+  `sku_code` varchar(100) DEFAULT '' COMMENT 'Phải đủ số lượng ký tự của 1 sku code, nếu có enum về color thì sẽ dễ quản lý hơn',
+  `product_id` int(11) NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `staffs` (
+  `staff_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `staff_fullname` varchar(100) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `gender` tinyint(1) DEFAULT 0 COMMENT 'Male: 0, Female: 1',
+  `address` varchar(200) DEFAULT NULL,
+  `entry_date` date DEFAULT current_timestamp(),
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `statistics` (
+  `statistic_id` int(11) NOT NULL,
+  `statistic_name` varchar(200) NOT NULL COMMENT 'Dùng các function, trigger, procedure, view,... Để tạo ra các dữ liệu muốn thống kê',
+  `value` longtext NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `suppliers` (
+  `supplier_id` int(11) NOT NULL,
+  `supplier_name` varchar(200) NOT NULL,
+  `phone_number_of_supplier` varchar(20) NOT NULL,
+  `address_of_supplier` varchar(200) NOT NULL,
+  `email_of_supplier` varchar(100) NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
+) ;
+
+
+
+CREATE TABLE `timesheets` (
+  `timesheet_id` int(11) NOT NULL,
+  `contract_id` int(11) NOT NULL,
+  `month` int(2) NOT NULL,
+  `year` int(2) NOT NULL,
+  `days_worked` int(2) NOT NULL,
+  `days_off` int(2) NOT NULL,
+  `days_leave` int(2) NOT NULL,
+  `days_late` int(2) NOT NULL
+) ;
+
+
+DELIMITER $$
+CREATE TRIGGER `update_total_salary_timesheets_insert` AFTER INSERT ON `timesheets` FOR EACH ROW BEGIN
+    DECLARE total_days_worked INT;
+    DECLARE total_days_late INT;
+    DECLARE total_salary DECIMAL(10, 2);
+    SET total_days_worked = NEW.days_worked;
+    SET total_days_late = NEW.days_late;
+    SET total_salary = (SELECT salary FROM contracts WHERE contract_id = NEW.contract_id) / 26 * total_days_worked
+                      - (SELECT salary FROM contracts WHERE contract_id = NEW.contract_id) / 26 * total_days_late * 0.3;
+    INSERT INTO timesheet_details(timesheet_id, total_salary) VALUES (NEW.timesheet_id, total_salary);
+    UPDATE timesheet_details SET timesheet_details.total_salary = total_salary WHERE timesheet_details.timesheet_id = NEW.timesheet_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update_total_salary_timesheets_update` AFTER UPDATE ON `timesheets` FOR EACH ROW BEGIN
+    DECLARE total_days_worked INT;
+    DECLARE total_days_late INT;
+    DECLARE total_salary DECIMAL(10, 2);
+    SET total_days_worked = NEW.days_worked;
+    SET total_days_late = NEW.days_late;
+    SET total_salary = (SELECT salary FROM contracts WHERE contract_id = NEW.contract_id) / 26 * total_days_worked
+                      - (SELECT salary FROM contracts WHERE contract_id = NEW.contract_id) / 26 * total_days_late * 0.3;
+    UPDATE timesheet_details SET timesheet_details.total_salary = total_salary WHERE timesheet_details.timesheet_id = NEW.timesheet_id;
+END
+$$
+DELIMITER ;
+
+
+
+CREATE TABLE `timesheet_details` (
+  `timesheet_detail_id` int(11) NOT NULL,
+  `timesheet_id` int(11) NOT NULL,
+  `total_salary` decimal(20,2) NOT NULL
+) ;
+
+
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`account_id`),
+  ADD UNIQUE KEY `phone_number` (`phone_number`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Chỉ mục cho bảng `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`attendance_id`);
+
+--
+-- Chỉ mục cho bảng `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`brand_id`),
+  ADD UNIQUE KEY `brand_name` (`brand_name`),
+  ADD KEY `brands_ibfk_1` (`supplier_id`);
+
+--
+-- Chỉ mục cho bảng `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Chỉ mục cho bảng `contracts`
+--
+ALTER TABLE `contracts`
+  ADD PRIMARY KEY (`contract_id`),
+  ADD KEY `staff_id` (`staff_id`);
+
+--
+-- Chỉ mục cho bảng `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`customer_id`),
+  ADD KEY `customers_ibfk_1` (`role_id`),
+  ADD KEY `account_id` (`account_id`);
+
+--
+-- Chỉ mục cho bảng `decentralizations`
+--
+ALTER TABLE `decentralizations`
+  ADD PRIMARY KEY (`decentralization_id`),
+  ADD UNIQUE KEY `decentralizations_index_0` (`role_id`,`module_id`),
+  ADD KEY `decentralizations_ibfk_2` (`module_id`);
+
+--
+-- Chỉ mục cho bảng `exports`
+--
+ALTER TABLE `exports`
+  ADD PRIMARY KEY (`export_id`),
+  ADD KEY `exports_ibfk_1` (`staff_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Chỉ mục cho bảng `export_details`
+--
+ALTER TABLE `export_details`
+  ADD PRIMARY KEY (`export_detail_id`),
+  ADD KEY `shipment_id` (`shipment_id`),
+  ADD KEY `export_id` (`export_id`);
+
+--
+-- Chỉ mục cho bảng `guarantees`
+--
+ALTER TABLE `guarantees`
+  ADD PRIMARY KEY (`guarantee_id`),
+  ADD KEY `serial_number` (`serial_number`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Chỉ mục cho bảng `imports`
+--
+ALTER TABLE `imports`
+  ADD PRIMARY KEY (`import_id`),
+  ADD KEY `imports_ibfk_1` (`staff_id`);
+
+--
+-- Chỉ mục cho bảng `leave_application`
+--
+ALTER TABLE `leave_application`
+  ADD PRIMARY KEY (`leave_application_id`);
+
+--
+-- Chỉ mục cho bảng `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`like_id`),
+  ADD UNIQUE KEY `likes_index_1` (`product_id`,`customer_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Chỉ mục cho bảng `modules`
+--
+ALTER TABLE `modules`
+  ADD PRIMARY KEY (`module_id`);
+
+--
+-- Chỉ mục cho bảng `noti`
+--
+ALTER TABLE `noti`
+  ADD PRIMARY KEY (`noti_id`),
+  ADD KEY `account_id` (`account_id`);
+
+--
+-- Chỉ mục cho bảng `options`
+--
+ALTER TABLE `options`
+  ADD PRIMARY KEY (`option_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `orders_ibfk_1` (`account_id`),
+  ADD KEY `staff_id` (`staff_id`);
+
+--
+-- Chỉ mục cho bảng `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`order_detail_id`),
+  ADD KEY `order_details_ibfk_1` (`order_id`),
+  ADD KEY `sku_id` (`sku_id`);
+
+--
+-- Chỉ mục cho bảng `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `products_ibfk_1` (`brand_id`),
+  ADD KEY `products_ibfk_2` (`category_id`);
+
+--
+-- Chỉ mục cho bảng `product_details`
+--
+ALTER TABLE `product_details`
+  ADD PRIMARY KEY (`serial_number`),
+  ADD KEY `sku_id` (`sku_id`),
+  ADD KEY `shipment_id` (`shipment_id`);
+
+--
+-- Chỉ mục cho bảng `product_images`
+--
+ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`product_image_id`),
+  ADD KEY `product_images_ibfk_1` (`product_id`);
+
+--
+-- Chỉ mục cho bảng `removes`
+--
+ALTER TABLE `removes`
+  ADD KEY `orderID` (`orderID`),
+  ADD KEY `order_detail_id` (`order_detail_id`),
+  ADD KEY `shipment_id` (`shipment_id`);
+
+--
+-- Chỉ mục cho bảng `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Chỉ mục cho bảng `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`role_id`);
+
+--
+-- Chỉ mục cho bảng `shipments`
+--
+ALTER TABLE `shipments`
+  ADD PRIMARY KEY (`shipment_id`),
+  ADD KEY `shipments_ibfk_1` (`supplier_id`),
+  ADD KEY `import_id` (`import_id`),
+  ADD KEY `sku_id` (`sku_id`);
+
+--
+-- Chỉ mục cho bảng `skus`
+--
+ALTER TABLE `skus`
+  ADD PRIMARY KEY (`sku_id`),
+  ADD UNIQUE KEY `sku_code` (`sku_code`),
+  ADD KEY `skus_ibfk_1` (`product_id`);
+
+--
+-- Chỉ mục cho bảng `staffs`
+--
+ALTER TABLE `staffs`
+  ADD PRIMARY KEY (`staff_id`),
+  ADD KEY `staffs_ibfk_1` (`role_id`),
+  ADD KEY `account_id` (`account_id`);
+
+--
+-- Chỉ mục cho bảng `statistics`
+--
+ALTER TABLE `statistics`
+  ADD PRIMARY KEY (`statistic_id`);
+
+--
+-- Chỉ mục cho bảng `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`supplier_id`),
+  ADD UNIQUE KEY `phone_number_of_supplier` (`phone_number_of_supplier`),
+  ADD UNIQUE KEY `email_of_supplier` (`email_of_supplier`);
+
+--
+-- Chỉ mục cho bảng `timesheets`
+--
+ALTER TABLE `timesheets`
+  ADD PRIMARY KEY (`timesheet_id`),
+  ADD KEY `contract_id` (`contract_id`);
+
+--
+-- Chỉ mục cho bảng `timesheet_details`
+--
+ALTER TABLE `timesheet_details`
+  ADD PRIMARY KEY (`timesheet_detail_id`),
+  ADD KEY `timesheet_id` (`timesheet_id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `contracts`
+--
+ALTER TABLE `contracts`
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `decentralizations`
+--
+ALTER TABLE `decentralizations`
+  MODIFY `decentralization_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `exports`
+--
+ALTER TABLE `exports`
+  MODIFY `export_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `export_details`
+--
+ALTER TABLE `export_details`
+  MODIFY `export_detail_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `guarantees`
+--
+ALTER TABLE `guarantees`
+  MODIFY `guarantee_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `imports`
+--
+ALTER TABLE `imports`
+  MODIFY `import_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `leave_application`
+--
+ALTER TABLE `leave_application`
+  MODIFY `leave_application_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `modules`
+--
+ALTER TABLE `modules`
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `noti`
+--
+ALTER TABLE `noti`
+  MODIFY `noti_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `options`
+--
+ALTER TABLE `options`
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `products`
+--
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `product_images`
+--
+ALTER TABLE `product_images`
+  MODIFY `product_image_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `shipments`
+--
+ALTER TABLE `shipments`
+  MODIFY `shipment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `skus`
+--
+ALTER TABLE `skus`
+  MODIFY `sku_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `staffs`
+--
+ALTER TABLE `staffs`
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `statistics`
+--
+ALTER TABLE `statistics`
+  MODIFY `statistic_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `timesheets`
+--
+ALTER TABLE `timesheets`
+  MODIFY `timesheet_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `timesheet_details`
+--
+ALTER TABLE `timesheet_details`
+  MODIFY `timesheet_detail_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `brands`
+--
+ALTER TABLE `brands`
+  ADD CONSTRAINT `brands_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`supplier_id`);
+
+--
+-- Các ràng buộc cho bảng `contracts`
+--
+ALTER TABLE `contracts`
+  ADD CONSTRAINT `contracts_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staffs` (`staff_id`);
+
+--
+-- Các ràng buộc cho bảng `customers`
+--
+ALTER TABLE `customers`
+  ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`),
+  ADD CONSTRAINT `customers_ibfk_2` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`);
+
+--
+-- Các ràng buộc cho bảng `decentralizations`
+--
+ALTER TABLE `decentralizations`
+  ADD CONSTRAINT `decentralizations_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`),
+  ADD CONSTRAINT `decentralizations_ibfk_2` FOREIGN KEY (`module_id`) REFERENCES `modules` (`module_id`);
+
+--
+-- Các ràng buộc cho bảng `exports`
+--
+ALTER TABLE `exports`
+  ADD CONSTRAINT `exports_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staffs` (`staff_id`),
+  ADD CONSTRAINT `exports_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+
+--
+-- Các ràng buộc cho bảng `export_details`
+--
+ALTER TABLE `export_details`
+  ADD CONSTRAINT `export_details_ibfk_3` FOREIGN KEY (`shipment_id`) REFERENCES `shipments` (`shipment_id`),
+  ADD CONSTRAINT `export_details_ibfk_4` FOREIGN KEY (`shipment_id`) REFERENCES `shipments` (`shipment_id`),
+  ADD CONSTRAINT `export_details_ibfk_5` FOREIGN KEY (`export_id`) REFERENCES `exports` (`export_id`);
+
+--
+-- Các ràng buộc cho bảng `guarantees`
+--
+ALTER TABLE `guarantees`
+  ADD CONSTRAINT `guarantees_ibfk_1` FOREIGN KEY (`serial_number`) REFERENCES `product_details` (`serial_number`),
+  ADD CONSTRAINT `guarantees_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+
+--
+-- Các ràng buộc cho bảng `imports`
+--
+ALTER TABLE `imports`
+  ADD CONSTRAINT `imports_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staffs` (`staff_id`);
+
+--
+-- Các ràng buộc cho bảng `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`);
+
+--
+-- Các ràng buộc cho bảng `noti`
+--
+ALTER TABLE `noti`
+  ADD CONSTRAINT `noti_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`);
+
+--
+-- Các ràng buộc cho bảng `options`
+--
+ALTER TABLE `options`
+  ADD CONSTRAINT `options_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Các ràng buộc cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `staffs` (`staff_id`);
+
+--
+-- Các ràng buộc cho bảng `order_details`
+--
+ALTER TABLE `order_details`
+  ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`sku_id`) REFERENCES `skus` (`sku_id`);
+
+--
+-- Các ràng buộc cho bảng `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`brand_id`),
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+
+--
+-- Các ràng buộc cho bảng `product_details`
+--
+ALTER TABLE `product_details`
+  ADD CONSTRAINT `product_details_ibfk_1` FOREIGN KEY (`sku_id`) REFERENCES `skus` (`sku_id`),
+  ADD CONSTRAINT `product_details_ibfk_2` FOREIGN KEY (`shipment_id`) REFERENCES `shipments` (`shipment_id`);
+
+--
+-- Các ràng buộc cho bảng `product_images`
+--
+ALTER TABLE `product_images`
+  ADD CONSTRAINT `product_images_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Các ràng buộc cho bảng `removes`
+--
+ALTER TABLE `removes`
+  ADD CONSTRAINT `removes_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `removes_ibfk_2` FOREIGN KEY (`order_detail_id`) REFERENCES `order_details` (`order_detail_id`),
+  ADD CONSTRAINT `removes_ibfk_3` FOREIGN KEY (`shipment_id`) REFERENCES `shipments` (`shipment_id`);
+
+--
+-- Các ràng buộc cho bảng `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`);
+
+--
+-- Các ràng buộc cho bảng `shipments`
+--
+ALTER TABLE `shipments`
+  ADD CONSTRAINT `shipments_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`supplier_id`),
+  ADD CONSTRAINT `shipments_ibfk_2` FOREIGN KEY (`import_id`) REFERENCES `imports` (`import_id`),
+  ADD CONSTRAINT `shipments_ibfk_3` FOREIGN KEY (`sku_id`) REFERENCES `skus` (`sku_id`);
+
+--
+-- Các ràng buộc cho bảng `skus`
+--
+ALTER TABLE `skus`
+  ADD CONSTRAINT `skus_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Các ràng buộc cho bảng `staffs`
+--
+ALTER TABLE `staffs`
+  ADD CONSTRAINT `staffs_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`),
+  ADD CONSTRAINT `staffs_ibfk_2` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`);
+
+--
+-- Các ràng buộc cho bảng `timesheets`
+--
+ALTER TABLE `timesheets`
+  ADD CONSTRAINT `timesheets_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `contracts` (`contract_id`);
+
+--
+-- Các ràng buộc cho bảng `timesheet_details`
+--
+ALTER TABLE `timesheet_details`
+  ADD CONSTRAINT `timesheet_details_ibfk_1` FOREIGN KEY (`timesheet_id`) REFERENCES `timesheets` (`timesheet_id`);
+COMMIT;
+

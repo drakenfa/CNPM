@@ -1,0 +1,152 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 60px;
+
+    background-color: rgb(245, 245, 245);
+}
+
+.customer-info-form-wrapper{
+    width: 60%;
+    min-width: 600px;
+    max-width: 800px;
+
+
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    padding:30px 30px;
+
+    gap: 30px;
+}
+
+.customer-info-form-wrapper .large-title{
+    font-size: 22pt;
+    font-weight: 600;
+
+    padding: 10px 10px;
+
+    text-align: center;
+}
+
+.customer-info-form-wrapper .title{
+    font-size: 18pt;
+    font-weight: 600;
+
+    padding: 10px 10px;
+}
+
+.customer-info-form-wrapper >*{
+    width:80%;
+}
+
+.avatar-info-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar-info-wrapper .avatar-img-wrapper{
+    position: relative;
+    width:40%;
+    aspect-ratio: 1/1;
+    background-color: white;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    overflow: hidden;
+    max-width:400px;
+}
+
+.avatar-info-wrapper .avatar-img-wrapper input[type="file"]{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity: 0;
+    z-index: 10;
+}
+
+.avatar-info-wrapper .avatar-img-wrapper img{
+    position:absolute;
+
+    top:50%;
+    transform: translate(0, -50%);
+
+    width:100%;
+    z-index: 0;
+}
+
+.avatar-info-wrapper .avatar-img-wrapper .img-input-overlay{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height:100%;
+
+    background-color: rgba(0, 0, 0, 0.493);
+    z-index: 10;
+
+    opacity: 0;
+}
+.avatar-info-wrapper .avatar-img-wrapper .img-input-overlay:hover{
+    opacity: 100%;
+}
+
+.avatar-info-wrapper .avatar-img-wrapper .img-input-overlay .overlay-message{
+    font-size: 22pt;
+    font-weight: 600;
+    color: white;
+}
+
+.customer-info-form-wrapper .input-info-wrapper{
+    display: flex;
+    flex-direction: column;
+    width:70%;
+    align-items: center;
+
+    gap:20px;
+}
+
+.customer-info-form-wrapper .input-info-wrapper .c-input{
+    width:100%;
+}
+
+.customer-info-form-wrapper .input-info-wrapper .c-input#input_address textarea{
+    height:5em;
+    line-height: 1.4;
+    padding-top:5px;
+}
+
+.customer-info-form-wrapper .input-info-wrapper .info-edit-options{
+    display:flex;
+}
+
+.customer-info-form-wrapper .input-info-wrapper .info-edit-options .option{
+    padding: 10px 20px;
+    background-color: rgb(164, 199, 231);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.customer-info-form-wrapper .input-info-wrapper .info-edit-options .option:hover{
+    background-color: rgb(131, 172, 211);
+}
+
+.customer-info-form-wrapper .input-info-wrapper .info-edit-options .option.disabled{
+    background-color: rgb(146, 146, 146);
+    cursor: not-allowed;
+}
+
+.hidden{
+    display: none;
+}

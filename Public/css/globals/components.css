@@ -1,0 +1,239 @@
+@media screen and (orientation:landscape){
+    .two-subpanels{
+        display:flex;
+        flex-direction: row;
+    }
+    .two-subpanels .subpanel.left-panel{
+        width: 55%;
+    }
+    .two-subpanels .subpanel.right-panel{
+        width: 45%;
+    }
+}
+
+@media screen and ((max-width: 800px) or (orientation:portrait)){
+    .two-subpanels{
+        display:flex;
+        flex-direction: column;
+    }
+    .two-subpanels .subpanel{
+        width: 100%;
+    }
+}
+
+.two-subpanels{
+    padding-top:30px; 
+}
+/* widgets */
+.widget-container{
+    position: relative;
+}
+
+.widget-container .widget-list-wrapper{
+    overflow-x: hidden;
+
+    position:relative;
+}
+
+.widget-container .widget-list-wrapper .widget-list{
+    position:relative;
+}
+
+.widget-container .left-widget-button{
+    left:calc(-3.5vh - 5px);
+}
+.widget-container .right-widget-button{
+    right:calc(-3.5vh - 5px);
+}
+
+.widget-container .left-widget-button,
+.widget-container .right-widget-button{
+    position:absolute;
+
+    top:calc(100% / 2 - 40%);
+
+    width:3.5vh;
+    height:72%;
+
+    border:0;
+
+    font-size: 14pt;
+    font-weight: 600;
+}
+
+@keyframes widget-slide-left{
+    100%{
+        left:-100%;
+    }
+    0%{
+        left:0;
+    }
+}
+
+@keyframes widget-slide-right{
+    100%{
+        right:-100%;
+    }
+    0%{
+        right:0;
+    }
+}
+
+/* notifications */
+@keyframes slide-down-effect {
+    0%{
+        top:0%;
+        transform: translate(-50% , 0%)
+    }
+    100%{
+        top:50%;
+        left:50%;
+        transform: translate(-50% , -50%)
+    }
+}
+
+#notifications-wrapper{
+    position:fixed;
+    left:0;
+    top:0;
+
+    
+    width:0;
+    height:0;
+}
+
+#notifications-wrapper .overlay-notification-wrapper
+{
+    display:none;
+    width:100vw;
+    height:100vh;
+}
+
+
+#notifications-wrapper .notification-overlay{
+    position: absolute;
+
+    background-color: rgba(0, 0, 0, 0.548);
+
+    
+    width:100vw;
+    height:100vh;
+}
+
+#notifications-wrapper .notification-container{
+    display:block;
+    
+    position: fixed;
+
+    background-color: white;
+
+    left:50vw; 
+    top:50vh;
+
+    width:50vw;
+    height:50vh;
+
+    transform: translate(-50%, -50%);
+}
+
+@keyframes slider-dialog-slide-down-effect{
+    0%{
+        top:0vh;
+    }
+    100%{
+        top:10vh;
+    }
+}
+
+@keyframes slider-dialog-slide-up-effect{
+    0%{
+        top:10vh;
+    }
+    100%{
+        top:-10vh;
+    }
+}
+
+#notifications-wrapper .slider-notification-wrapper{
+    display:none;
+    
+    position:fixed;
+    left:50vw;
+    top:10vh;
+
+    transform: translate(-50%,0);
+
+    max-width:50vw;
+    max-height:50vh;
+
+    min-width: 25em;
+    
+    height: 5em;
+    background-color: rgb(255, 255, 255);
+
+    border-radius: 4px;
+
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.459);
+    
+    z-index: 100;
+
+    overflow: hidden;
+}
+
+#notifications-wrapper .slider-notification-wrapper .notification-box{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+    width:100%;
+    height:100%;
+}
+
+#notifications-wrapper .slider-notification-wrapper .notification-header{
+    width:100%;
+    height:1em;
+    display:flex;
+
+    height:1em;
+
+    position: relative;
+
+    padding-top:8px;
+
+    background-color: rgba(194, 194, 194, 0.555);
+}
+
+#notifications-wrapper .slider-notification-wrapper .notification-header .exit-button{
+    position: absolute;
+
+    top:0;
+    right:8px;
+
+    height:20px;
+    padding: 0 6px;
+
+    font-size: 12pt;
+    text-decoration: underline;
+}
+
+#notifications-wrapper .slider-notification-wrapper .notification-info{
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items: center;
+    justify-content:  center;
+}
+
+#notifications-wrapper .slider-notification-wrapper .notification-info .notification-message{
+    margin:0 10px;
+}
+
+/* button effects */
+.div-button-effect{
+    
+}
+
+.div-button-effect:hover{
+
+}

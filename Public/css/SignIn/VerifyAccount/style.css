@@ -1,0 +1,80 @@
+.body{
+    width:100%;
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.email-verification-form{
+    max-width:600px;
+    width:50vw;
+    min-width: 550px;
+
+    background-color: var(--secondary-light-color);
+
+    border-radius: 10px;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+
+
+    overflow: hidden;
+}
+
+.email-verification-form .title{
+    width: 100%;
+    background-color: var(--light-contrast-color2);
+    font-size: 20pt;
+    font-weight: 650;
+
+    text-align: center;
+
+    padding: 15px 0;
+}
+
+/* .email-verification-form .code-input{
+    width:2vw;
+} */
+
+.email-verification-form .form-content-wrapper{
+    margin: 20px 10px;
+    display:flex;
+    flex-direction: column;
+}
+.form-content-wrapper .form-message{
+    margin-bottom:10px;
+    line-height: 1.4;
+}
+
+.form-content-wrapper .c-input{
+    width:80%;
+    align-self: center;
+}
+
+
+.email-verification-form .form-bottom-wrapper{
+    margin: 20px 15px;
+
+    display: flex;
+    flex-direction: column;
+    
+    row-gap: 20px;
+}
+
+.form-bottom-wrapper .submit-wrapper{
+    display:flex;
+    justify-content: center;
+    gap:10px;
+}
+
+.form-bottom-wrapper .submit-wrapper #code-submit{
+    width:10em;
+}
+
+.form-bottom-wrapper .submit-wrapper #resend-submit{
+    width:10em;
+}

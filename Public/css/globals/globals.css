@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+body {
+    margin: 0 0;
+
+    /* font-family: "Roboto", sans-serif; */
+}
+
+input::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    /* font-family: "Roboto", sans-serif;    */
+    /* font-weight: 450; */
+}
+
+input.input-error-highlight {
+    border-color: red;
+    border-width: 3px;
+}
+
+div.c-input {
+    display: flex;
+    flex-direction: column;
+}
+div.c-input .input-error-message {
+    display: none;
+    color: red;
+    text-indent: 20px;
+    font-weight: 500;
+}
+
+:root {
+    --primary-light-color: rgb(255, 255, 255);
+    --secondary-light-color: rgb(227, 235, 238);
+
+    --main-dark-background-color: rgb(0, 0, 0);
+
+    --light-contrast-color1: #83dfba;
+    --light-contrast-color2: #83c2df;
+    --light-contrast-color3: #ed7878;
+
+    --dark-contrast-color1: #2d503a;
+    --dark-contrast-color2: #2a3353;
+    --dark-contrast-color3: #502d30;
+}
+
+.no-user-select {
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+a {
+    color: rgb(13, 128, 182);
+    font-weight: 400;
+}
+
+a:hover {
+    color: rgb(13, 128, 182);
+    font-weight: 700;
+}
+
+a.no-style:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+a.no-style:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}

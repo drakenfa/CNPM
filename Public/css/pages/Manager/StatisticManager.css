@@ -1,0 +1,211 @@
+.chart-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.content-module{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.mg-top-bottom{
+    margin: 50px 0;
+}
+.top-bar-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    gap: 15px;
+}
+.top-bar-buttons button,
+#download-profit-chart,
+#download-import-chart,
+#download-export-chart,
+#download-salary-chart{
+    padding: 7px 10px;
+    background-color: var(--primary-color-blue);
+    border-radius: 7px;
+    color: #fff;
+    transition: 0.25s;
+}
+.top-bar-buttons button:hover,
+#download-profit-chart:hover,
+#download-import-chart:hover,
+#download-export-chart:hover,
+#download-salary-chart:hover{
+    opacity: 0.7;
+}
+
+button.active{
+    background-color: #ccc;
+    color: #000;
+}
+.hide{
+    display: none;
+}
+.mt-mb-20{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.ml-mr-20{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.filter-chart{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#business-situation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.value-container{
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+}
+.title-statistic{
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #686868;
+    font-size: 20px;
+}
+.revenue-of-products,
+.profit-of-products,
+.number-of-product{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 4px 7px 25px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color-green);
+}
+.date-picker {
+    display: flex;
+    gap: 5px;
+}
+.start-date-picker,
+.end-date-picker {
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 15%;
+    gap: 5px;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.start-date-picker input,
+.end-date-picker input {
+    width: 80%;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #bbb;
+}
+
+/* Table */
+.details {
+    position: relative;
+    top: 50px;
+    width: 75%;
+    padding: 20px;
+    display: grid;
+    grid-gap: 30px;
+    /* margin-top: 10px; */
+}
+.details .customer-table {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    max-height: 540px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 4px 7px 25px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+}
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 60px;
+}
+.table-header h2 {
+    font-weight: 600;
+    color: var(--primary-color-blue);
+    font-size: 30px;
+}
+.btn {
+    position: relative;
+    padding: 5px 10px;
+    background-color: var(--primary-color-blue);
+    text-decoration: none;
+    color: #fff;
+    border-radius: 6px;
+}
+.details table {
+    position: absolute;
+    width: calc(100% - 40px);
+    top: 60px;
+    left: 20px;
+    border-collapse: collapse;
+    margin-top: 10px;
+    max-height: 540px;
+    overflow-x: scroll;
+}
+.details table thead tr {
+    font-size: 19px;
+}
+.details table thead tr td:nth-child(4) {
+    text-align: center;
+}
+.details table thead tr td:nth-child(6) {
+    text-align: center;
+}
+.details table thead,
+.details table tbody {
+    min-width: 100%;
+}
+.details table thead td {
+    font-weight: 700;
+}
+.details .customer-table table tr {
+    color: #111;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.details .customer-table table tr:last-child {
+    border-bottom: none;
+}
+.details .customer-table table tbody tr:hover {
+    background-color: var(--primary-color-blue);
+    color: #fff;
+}
+.details .customer-table table tbody td {
+    padding: 10px 0;
+    font-size: 17px;
+    font-weight: 500;
+}
+.details .customer-table table td:first-child {
+    text-align: center;
+}
+.details .customer-table table td:nth-child(6),
+.details .customer-table table td:nth-child(5) {
+    text-align: center;
+}
+.details .customer-table table td:last-child {
+    text-align: center;
+}

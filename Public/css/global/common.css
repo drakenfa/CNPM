@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap");
+/* @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"); */
+/*reset-css*/
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+ul,
+li {
+    list-style: none;
+}
+img,
+picture,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+input,
+select,
+textarea {
+    background-color: transparent;
+    outline: none;
+}
+button {
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+}
+body {
+    min-height: 100vh;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    font-family: var(--primary-font);
+}
+:root {
+    --primary-font: "Dosis", sans-serif;
+    --primary-color-blue: rgb(54, 195, 254);
+    --primary-color-blue-opacity: rgba(56, 122, 223, 0.2);
+    --primary-bg-color: rgba(43, 190, 249, 0.2);
+    --primary-color-yellow: #fba834;
+    --primary-color-bg: #f6f6f6;
+    --primary-color-green: #9bcf53;
+    --primary-color-red: #e26e70;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+}
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}

@@ -1,0 +1,132 @@
+[33m265abdf[m[33m ([m[1;36mHEAD -> [m[1;32mhuy-branche[m[33m, [m[1;31morigin/huy-branche[m[33m)[m HEAD@{0}: reset: moving to HEAD
+[33m265abdf[m[33m ([m[1;36mHEAD -> [m[1;32mhuy-branche[m[33m, [m[1;31morigin/huy-branche[m[33m)[m HEAD@{1}: revert: Revert "Merge branch 'main' into huy-branche"
+[33md06edc9[m HEAD@{2}: checkout: moving from phong-branche to huy-branche
+[33md3db054[m[33m ([m[1;31morigin/phong-branche[m[33m, [m[1;32mphong-branche[m[33m)[m HEAD@{3}: checkout: moving from main to phong-branche
+[33m941ebc5[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{4}: checkout: moving from huy-branche to main
+[33md06edc9[m HEAD@{5}: checkout: moving from main to huy-branche
+[33m941ebc5[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{6}: checkout: moving from huy-branche to main
+[33md06edc9[m HEAD@{7}: checkout: moving from main to huy-branche
+[33m941ebc5[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{8}: checkout: moving from huy-branche to main
+[33md06edc9[m HEAD@{9}: commit (merge): Merge branch 'main' into huy-branche
+[33m8a6bd99[m HEAD@{10}: reset: moving to HEAD
+[33m8a6bd99[m HEAD@{11}: commit: 123
+[33m6d49e94[m HEAD@{12}: commit (merge): Merge branch 'phong-branche' into huy-branche
+[33m405f7db[m HEAD@{13}: checkout: moving from main to huy-branche
+[33mfbadf96[m HEAD@{14}: checkout: moving from phong-branche to main
+[33m5ec1927[m HEAD@{15}: checkout: moving from huy-branche to phong-branche
+[33m405f7db[m HEAD@{16}: commit: sửa db
+[33m0620a21[m HEAD@{17}: commit: 123
+[33maf0b563[m HEAD@{18}: commit: 123
+[33mf19a046[m HEAD@{19}: checkout: moving from main to huy-branche
+[33mfbadf96[m HEAD@{20}: checkout: moving from loc-branche to main
+[33m5645d5a[m[33m ([m[1;31morigin/loc-branche[m[33m, [m[1;32mloc-branche[m[33m)[m HEAD@{21}: checkout: moving from main to loc-branche
+[33mfbadf96[m HEAD@{22}: checkout: moving from huy-branche to main
+[33mf19a046[m HEAD@{23}: reset: moving to HEAD
+[33mf19a046[m HEAD@{24}: commit (merge): Merge branch 'main' into huy-branche
+[33m2b86d40[m HEAD@{25}: reset: moving to HEAD
+[33m2b86d40[m HEAD@{26}: merge main: Merge made by the 'ort' strategy.
+[33me0f23f2[m HEAD@{27}: commit: 123
+[33mec34875[m HEAD@{28}: commit: 123
+[33meebae3f[m HEAD@{29}: checkout: moving from main to huy-branche
+[33meebae3f[m HEAD@{30}: merge huy-branche: Fast-forward
+[33m8a0f8db[m HEAD@{31}: checkout: moving from huy-branche to main
+[33meebae3f[m HEAD@{32}: reset: moving to HEAD
+[33meebae3f[m HEAD@{33}: commit: 123
+[33mbed4611[m HEAD@{34}: merge main: Merge made by the 'ort' strategy.
+[33mb705eb8[m HEAD@{35}: checkout: moving from main to huy-branche
+[33m8a0f8db[m HEAD@{36}: checkout: moving from huy-branche to main
+[33mb705eb8[m HEAD@{37}: commit: perfection
+[33mdfe562e[m HEAD@{38}: commit: jnoj
+[33m5ef3313[m HEAD@{39}: commit: 123
+[33mcf4ce74[m HEAD@{40}: commit: kk
+[33mc139e38[m HEAD@{41}: commit: 123
+[33mb9311d6[m HEAD@{42}: checkout: moving from main to huy-branche
+[33mb9311d6[m HEAD@{43}: merge huy-branche: Fast-forward
+[33mbb07a54[m HEAD@{44}: checkout: moving from huy-branche to main
+[33mb9311d6[m HEAD@{45}: commit: cho phong
+[33mbb07a54[m HEAD@{46}: commit (merge): Merge branch 'main' into huy-branche
+[33me779a2a[m HEAD@{47}: commit: 123
+[33m46951ce[m HEAD@{48}: commit: 123
+[33mff7b1c8[m HEAD@{49}: checkout: moving from main to huy-branche
+[33m3c2c9a7[m HEAD@{50}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mff7b1c8[m HEAD@{51}: checkout: moving from huy-branche to main
+[33mff7b1c8[m HEAD@{52}: reset: moving to HEAD
+[33mff7b1c8[m HEAD@{53}: checkout: moving from main to huy-branche
+[33mff7b1c8[m HEAD@{54}: merge huy-branche: Fast-forward
+[33m534f39c[m HEAD@{55}: checkout: moving from huy-branche to main
+[33mff7b1c8[m HEAD@{56}: commit: 123
+[33m44893d3[m HEAD@{57}: commit: 123
+[33m534f39c[m HEAD@{58}: merge main: Fast-forward
+[33m4862d1f[m HEAD@{59}: merge main: Fast-forward
+[33m14372b5[m HEAD@{60}: checkout: moving from main to huy-branche
+[33m4862d1f[m HEAD@{61}: merge huy-branche: Merge made by the 'ort' strategy.
+[33m38c2b1c[m HEAD@{62}: checkout: moving from huy-branche to main
+[33m14372b5[m HEAD@{63}: commit: 123
+[33m1e39110[m HEAD@{64}: checkout: moving from main to huy-branche
+[33m1e39110[m HEAD@{65}: merge huy-branche: Fast-forward
+[33m1ecff30[m HEAD@{66}: checkout: moving from huy-branche to main
+[33m1e39110[m HEAD@{67}: reset: moving to HEAD
+[33m1e39110[m HEAD@{68}: commit (merge): Merge branch 'main' into huy-branche
+[33m73191ad[m HEAD@{69}: commit: update db
+[33m35fd79c[m HEAD@{70}: commit (merge): Merge branch 'main' into huy-branche
+[33m4c574fb[m HEAD@{71}: reset: moving to HEAD
+[33m4c574fb[m HEAD@{72}: commit: 123
+[33m3d6f526[m HEAD@{73}: commit: 123
+[33m2c8e8d6[m HEAD@{74}: commit (merge): Merge branch 'main' into huy-branche
+[33m4df7e60[m HEAD@{75}: reset: moving to HEAD
+[33m4df7e60[m HEAD@{76}: merge main: updating HEAD
+[33m4df7e60[m HEAD@{77}: checkout: moving from main to huy-branche
+[33mdb2b56f[m HEAD@{78}: checkout: moving from huy-branche to main
+[33m4df7e60[m HEAD@{79}: reset: moving to HEAD
+[33m4df7e60[m HEAD@{80}: checkout: moving from main to huy-branche
+[33mdb2b56f[m HEAD@{81}: checkout: moving from huy-branche to main
+[33m4df7e60[m HEAD@{82}: reset: moving to HEAD
+[33m4df7e60[m HEAD@{83}: commit: 123
+[33me02fd09[m HEAD@{84}: merge main: Merge made by the 'ort' strategy.
+[33m86a0061[m HEAD@{85}: reset: moving to HEAD
+[33m86a0061[m HEAD@{86}: commit: 123
+[33m60c1d4b[m HEAD@{87}: commit: 123
+[33m913763c[m HEAD@{88}: merge main: Merge made by the 'ort' strategy.
+[33m250aa5c[m HEAD@{89}: commit: 123
+[33m98b4598[m HEAD@{90}: merge main: Merge made by the 'ort' strategy.
+[33m233baa4[m HEAD@{91}: reset: moving to HEAD
+[33m233baa4[m HEAD@{92}: merge main: updating HEAD
+[33m233baa4[m HEAD@{93}: checkout: moving from main to huy-branche
+[33m238271f[m HEAD@{94}: checkout: moving from huy-branche to main
+[33m233baa4[m HEAD@{95}: reset: moving to HEAD
+[33m233baa4[m HEAD@{96}: commit: 123
+[33mae11acd[m HEAD@{97}: checkout: moving from main to huy-branche
+[33m9a635a4[m HEAD@{98}: checkout: moving from huy-branche to main
+[33mae11acd[m HEAD@{99}: merge main: Merge made by the 'ort' strategy.
+[33m2b06343[m HEAD@{100}: checkout: moving from main to huy-branche
+[33m9a635a4[m HEAD@{101}: checkout: moving from huy-branche to main
+[33m2b06343[m HEAD@{102}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mc2ab9e4[m HEAD@{103}: commit: 898
+[33m0cb2a51[m HEAD@{104}: checkout: moving from main to huy-branche
+[33m0cb2a51[m HEAD@{105}: checkout: moving from huy-branche to main
+[33m0cb2a51[m HEAD@{106}: reset: moving to HEAD
+[33m0cb2a51[m HEAD@{107}: reset: moving to 0cb2a513c1b4a64cd0a7465daa6ca7255743e15b
+[33me2f943f[m HEAD@{108}: commit: 123
+[33m0cb2a51[m HEAD@{109}: merge main: Fast-forward
+[33mf404a6f[m HEAD@{110}: reset: moving to HEAD
+[33mf404a6f[m HEAD@{111}: checkout: moving from main to huy-branche
+[33m0cb2a51[m HEAD@{112}: checkout: moving from huy-branche to main
+[33mf404a6f[m HEAD@{113}: reset: moving to HEAD
+[33mf404a6f[m HEAD@{114}: checkout: moving from phong-branche to huy-branche
+[33mf404a6f[m HEAD@{115}: checkout: moving from huy-branche to phong-branche
+[33mf404a6f[m HEAD@{116}: reset: moving to HEAD
+[33mf404a6f[m HEAD@{117}: checkout: moving from loc-branche to huy-branche
+[33mf404a6f[m HEAD@{118}: checkout: moving from huy-branche to loc-branche
+[33mf404a6f[m HEAD@{119}: reset: moving to HEAD
+[33mf404a6f[m HEAD@{120}: checkout: moving from main to huy-branche
+[33mf404a6f[m HEAD@{121}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m78253d7[m HEAD@{122}: reset: moving to HEAD
+[33m78253d7[m HEAD@{123}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m73750fb[m HEAD@{124}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m73eab28[m HEAD@{125}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mb7da6ad[m HEAD@{126}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m55b9866[m HEAD@{127}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33md5e6566[m HEAD@{128}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33me230f59[m HEAD@{129}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m2c2d81b[m HEAD@{130}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m906a1f9[m HEAD@{131}: commit (initial): Initial commit

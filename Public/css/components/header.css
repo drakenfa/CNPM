@@ -1,0 +1,127 @@
+.header {
+    margin: 0 auto; /*Căng giữa header*/
+    max-width: 70%; /*Hỗ trợ responsivce*/
+    height:100px;
+}
+.header .wrapper-components {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    padding-inline: 15px;
+    gap:30px;
+}
+.header .wrapper-components div.header-component,
+.header .wrapper-components a.header-component {
+    height: 80%;
+}
+
+.header .wrapper-components a{
+    cursor: pointer!important;
+}
+
+.header .wrapper-components .logo {
+    display: flex;
+    align-items: center;
+}
+.header .wrapper-components .logo img {
+    
+}
+.header .wrapper-components .logo .brand-name {
+    font-weight: 800;
+    font-size: 35px;
+    color: var(--primary-color-blue);
+}
+.header .wrapper-components .hotline {
+    width: 200px;
+    height: 65px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--primary-color-blue-opacity);
+    display: grid;
+    grid-template-areas:
+        "image customer-service"
+        "image phone-number";
+}
+.header .wrapper-components .hotline img {
+    width: 35px;
+    height: 35px;
+    grid-area: image;
+    align-self: center;
+}
+.header .wrapper-components .hotline .customer-service {
+    grid-area: customer-service;
+    font-size: 16px;
+    font-weight: 500;
+    align-self: flex-end;
+}
+.header .wrapper-components .hotline .phone-number {
+    grid-area: phone-number;
+    font-size: 20px;
+    color: green;
+    font-weight: 700;
+    align-self: flex-start;
+}
+.header .wrapper-components .search-bar {
+    width: 30%;
+}
+.header .wrapper-components .search-bar .form-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.header .wrapper-components .search-bar .input-search {
+    width: 100%;
+    height: 60px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: #f3f4f7;
+    padding-inline: 30px;
+}
+.header .wrapper-components .search-bar .form-search .btn-search {
+    position: absolute;
+    right: 10px;
+    outline: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    color: #666;
+}
+.header .wrapper-components .profile .shopping-cart {
+    text-decoration: none;
+    color: black;
+}
+.header .wrapper-components .profile {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    font-size: 20px;
+    text-align: center;
+}
+.header .wrapper-components .profile .avatar {
+    width: 40px;
+    height: 40px;
+}
+.header .wrapper-components .profile .avatar img {
+    border-radius: 100%;
+}
+.header .wrapper-components .profile button,
+.header .wrapper-components .profile a {
+    margin-inline: 15px;
+}
+.header .wrapper-components .profile i {
+    font-size: 23px;
+    color: #666;
+}
+
+.header .wrapper-components .header-ref{
+    font-size: 15pt;
+    color:rgb(25, 96, 163);
+    display: flex;
+    align-items: center;
+}

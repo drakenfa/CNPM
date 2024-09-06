@@ -1,0 +1,89 @@
+
+
+input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-family: "Roboto", sans-serif;
+    font-weight: 450;
+}
+
+input.input-error-highlight{
+    border-color: red;
+    border-width: 1px;
+}
+
+div.c-input {
+    display:flex;
+    flex-direction: column;
+}
+
+div.c-input > *{
+    margin-bottom: 4px;
+}
+
+div.c-input .input-label-wrapper{
+    display:flex;
+}
+
+div.c-input .input-label-wrapper label{
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+div.c-input .input-error-message{
+    color:red;
+    font-weight: 500;
+    display:none;
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+select,
+option
+{
+    height: 2.4em;
+    font-size: 11pt;
+    background-color: white;
+}
+
+input[type="text"],
+input[type="password"],
+select,
+option{
+    text-indent: 4px;
+}
+
+textarea{
+    resize:none;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus{
+    outline-width: 1px;
+    outline-color: black;
+    outline-style: solid;
+}
+
+input[type="submit"],
+input[type="button"]{
+    height:2.4em;
+    background-color: white;
+
+    font-weight: 500;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover{
+    background-color: rgb(233, 233, 233);
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+input[type="button"],
+select
+{
+    border-radius: 4px;
+}

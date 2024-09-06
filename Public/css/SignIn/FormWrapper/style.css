@@ -1,0 +1,22 @@
+html,body{
+    width:100%;
+    height:100%;
+}
+
+div.main{
+    width:100%;
+    height:calc(100% - 150px);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color:  rgb(238, 238, 238);
+}
+
+
+
+hr.form-separation{
+    margin: 0 0;
+    border-bottom: 1px solid black;
+}
